@@ -164,7 +164,7 @@ echo "  <meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\" />
 echo '  <meta name="viewport" content="width=device-width,initial-scale=1">'."\n";
 echo '  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">'."\n";
 echo '  <link href="http://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css">'."\n";
-echo "  <link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"default.zaa.css\" />\n";
+echo "  <link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"default.css\" />\n";
 if (is_readable("custom.css")) {
     echo "  <link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"custom.css\" />\n";
 }
