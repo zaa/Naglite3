@@ -37,3 +37,6 @@
 // Set to string to write the string
 // $nagliteHeading = '<Your Custom Heading>';
 //
+
+// Maximum length of the Plugin Output text we would like to display
+// $maxOutputLength = 65535;
