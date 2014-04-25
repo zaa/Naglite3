@@ -21,7 +21,7 @@ table {
 #content {
   min-width: 800px;
   max-width: 960px;
-  margin: 0.5em auto;
+  margin: 2em auto;
 }
 
 /* Typography */
@@ -41,6 +41,11 @@ h2 {
 
 h3 {
   font-size: 1.2em;
+}
+
+h1.page-title {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 
 /* Section Title and Stats */
