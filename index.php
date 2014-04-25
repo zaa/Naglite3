@@ -55,8 +55,17 @@ $nagios_status = get_nagios_status($nagios, $statusFile, $statusFileTimeout);
 // Output collected information
 if ($output_format == 'json') {
     header('Cache-Control: no-cache');
-    header('Content-Type: application/json; charset="utf-8"');
-    echo json_encode($nagios_status);
+    $callback = '';
+    if (isset($_GET['callback']) && preg_match('/^[A-Za-z0-9_-]+$/', $_GET['callback'])) {
+        $callback = $_GET['callback'];
+    }
+    if (!empty($callback)) {
+        header('Content-Type: text/javascript; charset="utf-8"');
+        echo $callback . '(' . json_encode($nagios_status) . ');';
+    } else {
+        header('Content-Type: application/json; charset="utf-8"');
+        echo json_encode($nagios_status);
+    }
     exit;
 } else {
     header('Cache-Control: no-cache');
