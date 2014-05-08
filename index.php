@@ -1,4 +1,5 @@
 <?php
+# vim: set ts=4 sts=4 sw=4 et:
 /**
  *  Naglite3 - Nagios Status Monitor
  *  Inspired by Naglite (http://www.monitoringexchange.org/inventory/Utilities/AddOn-Projects/Frontends/NagLite)
@@ -93,13 +94,13 @@ if ($output_format == 'json') {
     echo '<div id="content">'."\n";
     echo "<h1 class='page-title'>" . htmlspecialchars($page_title). "</h1>\n";
 
-    // Hosts section
     if ($nagios_status['status'] != 'ok') {
         echo "<h2 class='state down'>" . htmlspecialchars($nagios_status['message']) . "</h2>\n";
     } else {
         $counter = $nagios_status['data']['counter'];
         $states  = $nagios_status['data']['states'];
 
+        // Hosts section
         sectionHeader('hosts', $counter);
 
         if ($counter['hosts']['down']) {

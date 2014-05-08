@@ -1,4 +1,5 @@
 <?php
+# vim: set ts=4 sts=4 sw=4 et:
 
 function duration($end) {
     $DAY = 86400;
@@ -44,7 +45,7 @@ function servicesTable($nagios, $services, $select = false, $type = false) {
     print("</tr>\n");
 
     foreach ($select as $selectedType) {
-        if ($services[$selectedType]) {
+        if (isset($services[$selectedType]) && !empty($services[$selectedType])) {
             foreach ($services[$selectedType] as $service) {
                 $state = $nagios["service"][$service["current_state"]];
                 if (false === $type) {
@@ -76,14 +77,16 @@ function servicesTable($nagios, $services, $select = false, $type = false) {
     print("</table>\n");
 }
 
-function sectionHeader($type, $counter) {
-    print(sprintf('<div id="%s" class="section">'."\n", $type));
-    print(sprintf('<h2 class="sectionTitle">%s</h2>'."\n", ucfirst($type)));
-    print('<div class="stats">'."\n");
-    foreach($counter[$type] as $type => $value) {
-        print(sprintf('<div class="stat %s">%s %s</div>'."\n", $type, $value, ucfirst($type)));
+function sectionHeader($section, $counter) {
+    echo '<div id="' . $section . '" class="section">';
+    echo '<h2 class="sectionTitle">' . ucfirst($section) . '</h2>';
+    echo '<div class="stats">';
+    foreach($counter[$section] as $type => $value) {
+        if ($value > 0) {
+            echo '<div class="stat ' . $type . '">' . strtoupper($type) . ': ' . $value . '</div>';
+        }
     }
-    print('</div></div>'."\n");
+    echo '</div></div>';
 }
 
 function parse_status_file($statusFile, $statusFileTimeout) {
@@ -152,7 +155,25 @@ function get_nagios_status($nagios, $statusFile, $statusFileTimeout) {
     }
 
     $status = $nagios_status_data['data']['status'];
-    $counter = array();
+    $counter = array(
+        'hosts' => array(
+            'ok' => 0,
+            'down' => 0,
+            'unreachable' => 0,
+            'acknowledged' => 0,
+            'notification' => 0,
+            'pending' => 0
+        ),
+        'services' => array(
+            'ok' => 0,
+            'warning' => 0,
+            'critical' => 0,
+            'unknown' => 0,
+            'acknowledged' => 0,
+            'notification' => 0,
+            'pending' => 0,
+        )
+    );
     $states = array();
 
     foreach (array_keys($status) as $type) {

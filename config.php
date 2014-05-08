@@ -1,4 +1,5 @@
 <?php
+# vim: set ts=4 sts=4 sw=4 et:
 
 // Set file path to your nagios status log
 $statusFile = '/var/log/nagios/status.dat';
